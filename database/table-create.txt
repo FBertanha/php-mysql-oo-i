@@ -1,0 +1,15 @@
+CREATE TABLE `categorias` (
+  `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_categoria` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_categoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `produtos` (
+  `id_produto` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_produto` varchar(45) NOT NULL,
+  `preco_produto` double(10,4) NOT NULL,
+  `descricao_produto` text NOT NULL,
+  `id_categoria` int(11) DEFAULT NULL,
+  `usado_produto` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id_produto`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
