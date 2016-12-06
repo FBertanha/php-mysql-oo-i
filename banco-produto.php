@@ -11,10 +11,11 @@
     return $produtos;
   };
 
-  function insereProduto($conexao, $produto, $preco, $descricao, $categoria, $usado) {
-    $produto = mysqli_real_escape_string($conexao, $produto);
-    $descricao = mysqli_real_escape_string($conexao, $descricao);
-    $query = "INSERT INTO produtos (nome_produto, preco_produto, descricao_produto, id_categoria, usado_produto) VALUES ('{$produto}', '{$preco}', '{$descricao}', '{$categoria}', '{$usado}')";
+  function insereProduto($conexao, Produto $produto) {
+    $produto->nome = mysqli_real_escape_string($conexao, $produto->nome);
+    $produto->descricao = mysqli_real_escape_string($conexao, $produto->descricao);
+    $query = "INSERT INTO produtos (nome_produto, preco_produto, descricao_produto, id_categoria, usado_produto)
+      VALUES ('{$produto->nome}', '{$produto->preco}', '{$produto->descricao}', '{$produto->categoria_id}', '{$produto->usado}')";
     //echo $query;
     return mysqli_query($conexao, $query);
   };
@@ -30,10 +31,10 @@
     return $produto;
   };
 
-  function alteraProduto($conexao, $id, $produto, $preco, $descricao, $categoria, $usado) {
-    $produto = mysqli_real_escape_string($conexao, $produto);
-    $descricao = mysqli_real_escape_string($conexao, $descricao);
-    $query = "UPDATE produtos SET nome_produto = '{$produto}' , preco_produto = '{$preco}', descricao_produto = '{$descricao}', id_categoria = '{$categoria}', usado_produto = '{$usado}' WHERE id_produto = '{$id}'";
+  function alteraProduto($conexao, $produto) {
+    $produto->nome = mysqli_real_escape_string($conexao, $produto->nome);
+    $produto->descricao = mysqli_real_escape_string($conexao, $produto->descricao);
+    $query = "UPDATE produtos SET nome_produto = '{$produto->nome}' , preco_produto = '{$produto->preco}', descricao_produto = '{$produto->descricao}', id_categoria = '{$produto->categoria_id}', usado_produto = '{$produto->usado}' WHERE id_produto = '{$produto->id}'";
     //echo $query;
     return mysqli_query($conexao, $query);
   };
