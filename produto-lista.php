@@ -22,21 +22,22 @@
           <tbody>
             <?php
               $produtos = listaProdutos($conexao);
+              //var_dump($produtos);
               $soma = 0;
               foreach($produtos as $produto) {
-                $soma += $produto[5];
+                $soma += $produto->preco;
             ?>
               <tr>
-                <td><?=$produto[1];?></td>
-                <td><?=$produto[2];?></td>
-                <td><?=$produto[3];?></td>
-                <td><?=$produto[4];?></td>
-                <td><?=$produto[5];?></td>
+                <td><?=$produto->nome;?></td>
+                <td><?=$produto->descricao;?></td>
+                <td><?=$produto->categoria->nome;?></td>
+                <td><?=$produto->usado;?></td>
+                <td><?=$produto->preco;?></td>
                 <td>
                   <form class="" action="remove-produto.php" method="post">
-                    <input type="text" name="id" value="<?=$produto[0]?>" hidden="true">
+                    <input type="text" name="id" value="<?=$produto->id?>" hidden="true">
                     <button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
-                    <a href="produto-formulario-altera.php?id=<?=$produto[0]?>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="produto-formulario-altera.php?id=<?=$produto->id?>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
                   </form>
                 </td>
               </tr>

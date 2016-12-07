@@ -3,9 +3,11 @@
   //require_once('conecta.php');
   require_once('banco-categoria.php');
   require_once('logica-usuario.php');
+  require_once('class/Produto.php');
+  require_once('class/Categoria.php');
 
   verificaUsuario();
-  $produto = array(1 => "", 2 => "", 3 => "", 4 => "1", 5 => "unchecked");
+  $produto = new Produto();
 
 ?>
   <div class="row">

@@ -4,7 +4,7 @@ class Produto {
   public $nome;
   public $preco;
   public $descricao;
-  public $categoria_id;
+  public $categoria;
   public $usado;
 }
 ?>
