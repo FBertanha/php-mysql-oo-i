@@ -16,6 +16,7 @@
               <th>Categoria</th>
               <th>Estado</th>
               <th>Preço</th>
+              <th>Desconto</th>
               <th>Excluir/Editar</th>
             </tr>
           </thead>
@@ -33,6 +34,7 @@
                 <td><?=$produto->categoria->nome;?></td>
                 <td><?=$produto->usado;?></td>
                 <td><?=$produto->preco;?></td>
+                <td><?=$produto->precoComDesconto(0.20);?></td>
                 <td>
                   <form class="" action="remove-produto.php" method="post">
                     <input type="text" name="id" value="<?=$produto->id?>" hidden="true">
