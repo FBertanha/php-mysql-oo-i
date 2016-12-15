@@ -8,6 +8,8 @@
 
   verificaUsuario();
   $produto = new Produto();
+  $categoria = new Categoria();
+  $produto->setCategoria($categoria);
 
 ?>
   <div class="row">

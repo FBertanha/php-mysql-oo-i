@@ -4,29 +4,29 @@
   require_once('class/Categoria.php');
   require_once('class/Produto.php');
 
-  $categoria = new Categoria();
   $produto = new Produto();
+  $categoria = new Categoria();
 
-  $produto->id = $_POST['id_produto'];
-  $produto->nome = $_POST['produto'];
-  $produto->preco = $_POST['preco'];
-  $produto->descricao = $_POST['descricao'];
-  $categoria->id = $_POST['categoria_id'];
-  $produto->categoria = $categoria;
+  $produto->setId($_POST['id_produto']);
+  $produto->setNome($_POST['produto']);
+  $produto->setPreco($_POST['preco']);
+  $produto->setDescricao($_POST['descricao']);
+  $categoria->setId($_POST['categoria_id']);
+  $produto->setCategoria($categoria);
 
   if(isset($_POST['usado'])) {
-    $produto->usado = 1;
+    $produto->setUsado(1);
   }else {
-    $produto->usado = 0;
+    $produto->setUsado(0);
   }
 
   if(alteraProduto($conexao, $produto)) {
 ?>
-    <p class="text-success"> O Produto <?=$produto->nome?> foi alterado.</p>
+    <p class="text-success"> O Produto <?=$produto->getNome()?> foi alterado.</p>
     <?php } else {
       $msg = mysqli_error($conexao);
     ?>
-      <p class="text-danger"> O Produto <?=$produto->nome?> não foi alterado. <?=$msg?> </p>
+      <p class="text-danger"> O Produto <?=$produto->getNome()?> não foi alterado. <?=$msg?> </p>
 <?php
       }
 

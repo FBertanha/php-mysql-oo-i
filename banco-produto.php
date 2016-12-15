@@ -9,15 +9,15 @@
     $resultado = mysqli_query($conexao, "SELECT p.id_produto, p.nome_produto, p.descricao_produto, c.nome_categoria, IF(p.usado_produto = '1', 'Usado', 'Novo'), p.preco_produto FROM produtos AS p JOIN categorias AS c ON c.id_categoria = p.id_categoria ORDER BY p.id_produto");
     while($produto_array = mysqli_fetch_array($resultado)) {
       $categoria = new categoria();
-      $categoria->nome = $produto_array[3];
+      $categoria->setNome($produto_array[3]);
       $produto = new Produto();
 
-      $produto->id = $produto_array[0];
-      $produto->nome = $produto_array[1];
-      $produto->descricao = $produto_array[2];
-      $produto->categoria = $categoria;
-      $produto->preco = $produto_array[5];
-      $produto->usado = $produto_array[4];
+      $produto->setId($produto_array[0]);
+      $produto->setNome($produto_array[1]);
+      $produto->setDescricao($produto_array[2]);
+      $produto->setCategoria($categoria);
+      $produto->setPreco($produto_array[5]);
+      $produto->setUsado($produto_array[4]);
       //echo $produto->categoria->nome;
       array_push($produtos, $produto);
     };
@@ -25,10 +25,10 @@
   };
 
   function insereProduto($conexao, Produto $produto) {
-    $produto->nome = mysqli_real_escape_string($conexao, $produto->nome);
-    $produto->descricao = mysqli_real_escape_string($conexao, $produto->descricao);
+    $produto->setNome(mysqli_real_escape_string($conexao, $produto->getNome()));
+    $produto->setDescricao(mysqli_real_escape_string($conexao, $produto->getDescricao()));
     $query = "INSERT INTO produtos (nome_produto, preco_produto, descricao_produto, id_categoria, usado_produto)
-      VALUES ('{$produto->nome}', '{$produto->preco}', '{$produto->descricao}', '{$produto->categoria->id}', '{$produto->usado}')";
+      VALUES ('{$produto->getNome()}', '{$produto->getPreco()}', '{$produto->getDescricao()}', '{$produto->getCategoria()->getId()}', '{$produto->getUsado()}')";
     //echo $query;
     return mysqli_query($conexao, $query);
   };
@@ -42,25 +42,25 @@
     $resultado = mysqli_query($conexao, "SELECT p.id_produto, p.nome_produto, p.descricao_produto, c.id_categoria, c.nome_categoria, IF(p.usado_produto = '1', 'checked', ''), p.preco_produto FROM produtos AS p JOIN categorias AS c ON c.id_categoria = p.id_categoria WHERE p.id_produto = '{$id}'");
     $produto_array = mysqli_fetch_row($resultado);
     $categoria = new categoria();
-    $categoria->id = $produto_array[3];
-    $categoria->nome = $produto_array[4];
+    $categoria->setId($produto_array[3]);
+    $categoria->setNome($produto_array[4]);
     $produto = new Produto();
 
-    $produto->id = $produto_array[0];
-    $produto->nome = $produto_array[1];
-    $produto->descricao = $produto_array[2];
-    $produto->categoria = $categoria;
-    $produto->usado = $produto_array[5];
-    $produto->preco = $produto_array[6];
+    $produto->setId($produto_array[0]);
+    $produto->setNome($produto_array[1]);
+    $produto->setDescricao($produto_array[2]);
+    $produto->setCategoria($categoria);
+    $produto->setUsado($produto_array[5]);
+    $produto->setPreco($produto_array[6]);
 
     var_dump($categoria);
     return $produto;
   };
 
   function alteraProduto($conexao, $produto) {
-    $produto->nome = mysqli_real_escape_string($conexao, $produto->nome);
-    $produto->descricao = mysqli_real_escape_string($conexao, $produto->descricao);
-    $query = "UPDATE produtos SET nome_produto = '{$produto->nome}' , preco_produto = '{$produto->preco}', descricao_produto = '{$produto->descricao}', id_categoria = '{$produto->categoria->id}', usado_produto = '{$produto->usado}' WHERE id_produto = '{$produto->id}'";
+    $produto->setNome(mysqli_real_escape_string($conexao, $produto->getNome()));
+    $produto->getDescricao(mysqli_real_escape_string($conexao, $produto->getDescricao()));
+    $query = "UPDATE produtos SET nome_produto = '{$produto->getNome()}' , preco_produto = '{$produto->getPreco()}', descricao_produto = '{$produto->getDescricao()}', id_categoria = '{$produto->getCategoria()->getId()}', usado_produto = '{$produto->getUsado()}' WHERE id_produto = '{$produto->getId()}'";
     //echo $query;
     return mysqli_query($conexao, $query);
   };

@@ -26,20 +26,20 @@
               //var_dump($produtos);
               $soma = 0;
               foreach($produtos as $produto) {
-                $soma += $produto->preco;
+                $soma += $produto->getPreco();
             ?>
               <tr>
-                <td><?=$produto->nome;?></td>
-                <td><?=$produto->descricao;?></td>
-                <td><?=$produto->categoria->nome;?></td>
-                <td><?=$produto->usado;?></td>
-                <td><?=$produto->preco;?></td>
-                <td><?=$produto->precoComDesconto(0.20);?></td>
+                <td><?=$produto->getNome();?></td>
+                <td><?=$produto->getDescricao();?></td>
+                <td><?=$produto->getCategoria()->getNome();?></td>
+                <td><?=$produto->getUsado();?></td>
+                <td><?=$produto->getPreco();?></td>
+                <td><?=$produto->precoComDesconto(0.10);?></td>
                 <td>
                   <form class="" action="remove-produto.php" method="post">
-                    <input type="text" name="id" value="<?=$produto->id?>" hidden="true">
+                    <input type="text" name="id" value="<?=$produto->getId()?>" hidden="true">
                     <button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
-                    <a href="produto-formulario-altera.php?id=<?=$produto->id?>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="produto-formulario-altera.php?id=<?=$produto->getId()?>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
                   </form>
                 </td>
               </tr>
