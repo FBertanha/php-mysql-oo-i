@@ -7,6 +7,22 @@ class Produto {
   private $categoria;
   private $usado;
 
+  public function __construct($nome, $preco, $descricao, Categoria $categoria, $usado) {
+    $this->nome = $nome;
+    $this->preco = $preco;
+    $this->descricao = $descricao;
+    $this->categoria = $categoria;
+    $this->usado = $usado;
+  }
+
+  public function __destruct() {
+    echo "Produto destruído: " . $this->getNome();
+  }
+
+  public function __toString() {
+    return "Produtos:" . $this->nome . ", " . $this->descricao . ", R$ ". $this->preco;
+  }
+
   public function getId() {
     return $this->id;
   }

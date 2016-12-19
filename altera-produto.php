@@ -4,21 +4,17 @@
   require_once('class/Categoria.php');
   require_once('class/Produto.php');
 
-  $produto = new Produto();
-  $categoria = new Categoria();
 
-  $produto->setId($_POST['id_produto']);
-  $produto->setNome($_POST['produto']);
-  $produto->setPreco($_POST['preco']);
-  $produto->setDescricao($_POST['descricao']);
+  $categoria = new Categoria();
   $categoria->setId($_POST['categoria_id']);
-  $produto->setCategoria($categoria);
 
   if(isset($_POST['usado'])) {
-    $produto->setUsado(1);
+    $usado = 1;
   }else {
-    $produto->setUsado(0);
+    $usado = 0;
   }
+  $produto = new Produto($_POST['produto'], $_POST['preco'], $_POST['descricao'], $categoria, $usado);
+  $produto->setId($_POST['id_produto']);
 
   if(alteraProduto($conexao, $produto)) {
 ?>

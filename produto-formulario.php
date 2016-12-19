@@ -7,9 +7,10 @@
   require_once('class/Categoria.php');
 
   verificaUsuario();
-  $produto = new Produto();
+
   $categoria = new Categoria();
-  $produto->setCategoria($categoria);
+  $produto = new Produto('', '', '', $categoria, 0);
+
 
 ?>
   <div class="row">

@@ -8,19 +8,17 @@
 
   verificaUsuario();
   $categoria = new Categoria();
-  $produto = new Produto();
-
-  $produto->setNome($_POST['produto']);
-  $produto->setPreco($_POST['preco']);
-  $produto->setDescricao($_POST['descricao']);
   $categoria->setId($_POST['categoria_id']);
-  $produto->setCategoria($categoria);
 
+  $usado = 0;
   if(isset($_POST['usado'])) {
-    $produto->setUsado(1);
+    $usado = 1;
   }else {
-    $produto->setUsado(0);
+    $usado = 0;
   }
+  $produto = new Produto($_POST['produto'], $_POST['preco'], $_POST['descricao'], $categoria, $usado);
+
+  echo $produto;
 
   if(insereProduto($conexao, $produto)) {
 ?>
